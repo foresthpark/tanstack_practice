@@ -23,7 +23,6 @@ export default function Header() {
 	>({});
 	const navigate = useNavigate();
 	const session = useSession();
-	console.log("🚀 ~ Header ~ session:", session);
 
 	const handleLogout = async () => {
 		try {

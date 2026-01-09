@@ -37,21 +37,25 @@ export function LoginForm({
 		},
 		onSubmit: async ({ value }) => {
 			console.log("🚀 ~ LoginForm ~ value:", value);
+
+			const email = value.email;
+			const password = value.password;
+
 			await authClient.signIn.email(
 				{
-					email: value.email,
-					password: value.password,
+					email,
+					password,
 				},
 				{
 					onSuccess: () => {
 						toast.success("Login successful", {
-							description: `${value.email} logged in successfully with password`,
+							description: `${email} logged in successfully`,
 						});
 						navigate({ to: "/dashboard" });
 					},
-					onError: (error) => {
+					onError: (ctx) => {
 						toast.error("Login failed", {
-							description: error.error.message,
+							description: ctx?.error?.message || "An error occurred",
 						});
 					},
 				},
